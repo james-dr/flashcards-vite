@@ -14,7 +14,7 @@ const {
 router.get('/', getAllCards)
 router.get('/:id', getCardById)
 router.post('/', createCard)
-router.put('/:id', updateCard)
+router.patch('/:id', updateCard)
 router.delete('/:id', deleteCard)
 
 console.log('Cards routes loaded!')
