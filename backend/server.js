@@ -4,6 +4,7 @@ const helmet = require('helmet')
 require('dotenv').config()
 
 const cardsRoutes = require('./src/routes/cards')
+const decksRoutes = require('./src/routes/decks')
 
 const app = express()
 const PORT = process.env.PORT || 3001
@@ -23,6 +24,7 @@ app.get('/api/health', (req, res) => {
 })
 
 app.use('/api/cards', cardsRoutes)
+app.use('/api/decks', decksRoutes)
 
 app.use((err, req, res, next) => {
   console.error(err.stack)

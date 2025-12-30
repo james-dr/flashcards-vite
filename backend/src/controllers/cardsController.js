@@ -42,11 +42,11 @@ const getCardById = async (req, res) => {
         }
       }
     })
-    
+
     if (!card) {
       return res.status(404).json({ error: 'Card not found' })
     }
-    
+
     res.json(card)
   } catch (error) {
     console.error('Error in getCardById:', error)
@@ -56,7 +56,7 @@ const getCardById = async (req, res) => {
 
 const createCard = async (req, res) => {
   try {
-    const cardInfo = req.body 
+    const cardInfo = req.body
     const { error, value } = cardSchema.validate(cardInfo)
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
@@ -83,7 +83,7 @@ const updateCard = async (req, res) => {
     if (cardInfo.front !== undefined) updateData.front = cardInfo.front;
     if (cardInfo.back !== undefined) updateData.back = cardInfo.back;
 
-    const updatedCard = await prisma.card.update({
+    await prisma.card.update({
       where: {
         id: parseInt(req.params.id)
       },
@@ -93,14 +93,14 @@ const updateCard = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Error occurred updating card'})
   }
-   
+
 }
 
 const deleteCard = async (req, res) => {
   try {
     const cardId = req.params.id
 
-    const deleteCard = await prisma.card.delete({
+    await prisma.card.delete({
       where: {
         id: parseInt(cardId)
       }
